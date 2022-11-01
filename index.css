@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+  }
+        
+  
+  body {
+    background-color: #edeef6;
+  }
+  .navbar {
+    position: relative;
+    width: 100vw;
+  }
+  nav {
+    display: flex;
+    padding: 0 2rem;
+    justify-content: left;
+    align-items: center;
+    /* background-color: red; */
+    height: 7rem;
+    /* transition: height 0.5s; */
+  }
+  p {
+    font-size: 0.7em;
+    margin-top: 0.2rem;
+    padding: 0 0.7rem;
+  }
+  a:link,
+  a:visited {
+    text-decoration: none;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: "Lora", serif;
+    color: #557c3e;
+  
+    text-shadow: 1px 1px 1px #222;
+  }
+  .text {
+    margin-top: 9px;
+    text-align: center;
+  }
+        .textarea {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 70vh;
+        }
+  
+        #textarea-container {
+          outline: none;
+          resize: none;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          padding: 30px 50px;
+          background-color: white;
+          width: 50vw;
+          height: 50vh;
+          line-height: 1.5;
+          font-size: smaller;
+          text-decoration: none;
+        }
+        div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+         content: attr(data-placeholder);
+        float: left;
+        color: #b3b3b3;
+        }
+
+        .predict {
+          color: #757575;
+          user-select: none;
+        }
+  
+        .tab {
+          border: 1px solid #757575;
+          padding: 2px;
+          border-radius: 4px;
+          font-size: 0.75rem;
+        }
