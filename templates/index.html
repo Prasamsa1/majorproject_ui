@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap"
     rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -24,18 +25,19 @@
       </nav>
     </div>
   </header>
-  <form action="/" method="post">
+  
     <div class="text">SMART TEXT AUTOCOMPLETE</div>
+    <!-- <form action="{{url_for('predict')}}" method="post"> -->
     <div class="textarea">
-      <!-- <div id="textarea-container" contenteditable="true"  data-placeholder=" यहाँ लेख्नुहोस (Write Here)!!" name="text_area">
+      <div id="textarea-container" contenteditable="true"  data-placeholder=" यहाँ लेख्नुहोस (Write Here)!!" name="text_area">
         {{output}}
-      </div> -->
-      <input type="text" id="textarea-container"
-        placeholder="यहाँ लेख्नुहोस (Write Here)!!" name="text_area" value="{{output}}">
+      </div>
+      <!-- <textarea id="textarea-container" cols="50"
+        placeholder="यहाँ लेख्नुहोस (Write Here)!!" name="text_area" >{{output}}</textarea>
+        <button>predict</button> -->
     </div>
-  </form>
+  <!-- </form> -->
 </body>
 
-<script src="{{ url_for('static', filename='script1.js') }}"></script>
-
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </html>

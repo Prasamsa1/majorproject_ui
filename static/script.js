@@ -1,13 +1,4 @@
-let textarea = document.querySelector("#textarea-container");
-
-const suggestionWord = ["Prasamsa Paudel", "Gaming", "meet you", "one"];
-
-const suggestionActivation = [
-  "My name is",
-  "I love",
-  "Nice to",
-  "Two are better than",
-];
+let textarea = document.getElementById("textarea-container");
 
 let tabKeyPressed = false;
 let showSuggestions = false;
@@ -25,21 +16,13 @@ function setCursor() {
   range.collapse(false); //Remove whole text selection
   textarea.focus();
 }
+
 //To add suggestions to user text
 function addSuggestions(event, suggestedWord) {
   let textContents = event.target.childNodes[0].textContent;
   event.target.childNodes[0].textContent = `${textContents.trim()} ${suggestedWord}`;
   textarea.focus();
 }
-
-//To get suggestion
-//Use machine learning model to get suggested word. I had hardcorded right now.
-const getSuggestedWord = function (text) {
-  const endText = text.split(".").pop().trim();
-  let index = suggestionActivation.findIndex((value) => value == endText);
-
-  return suggestionWord[index];
-};
 
 //To show suggestions Word after user text
 function showSuggestionWord(suggestedWord) {
@@ -74,18 +57,44 @@ function predict(event) {
     ? event.target.childNodes[0].textContent
     : "";
 
-  const endText = text.split(".").pop().trim();
-
-  showSuggestions = suggestionActivation.some((value) => endText == value);
-
   let predictContainer = document.getElementById("predict");
   hasPredictContainer = Boolean(predictContainer);
 
-  if (showSuggestions && !hasPredictContainer) {
-    //Implement ML model here
-    suggestedWord = getSuggestedWord(text);
-    showSuggestionWord(suggestedWord);
+  if (event.code === "Space") {
+    let data = new FormData()
+    data.append("text_area", text)
+    const word = fetch('/', {
+      "method": "POST",
+      "body": data,
+    }).then((response) => {
+      return response.text()
+    })
+    // if (showSuggestions && !hasPredictContainer) {
+    //   //Implement ML model here
+
+    getSuggestedWord = () => {
+      word.then((suggestedWord) => {
+        showSuggestionWord(suggestedWord);
+        showSuggestions = true
+
+
+        if (tabKeyPressed && hasPredictContainer) {
+          setCursor();
+          predictContainer.remove();
+          addSuggestions(event, suggestedWord);
+          resetSuggestions();
+        }
+      })
+        if (showSuggestions && hasPredictContainer) {
+          predictContainer.remove();
+          resetSuggestions();
+        }
+      
+    };
+    getSuggestedWord()
+
   }
+  // }
 
   if (!showSuggestions && hasPredictContainer) {
     predictContainer.remove();
@@ -101,20 +110,20 @@ function predict(event) {
 }
 (function ($) {
 
-	$(document).on('change keydown keypress input', 'div[data-placeholder]', function() {
+  $(document).on('change keydown keypress input', 'div[data-placeholder]', function () {
 
-		if (this.textContent) {
+    if (this.textContent) {
 
-			this.dataset.divPlaceholderContent = 'true';
+      this.dataset.divPlaceholderContent = 'true';
 
-		}
+    }
 
-		else {
+    else {
 
-			delete(this.dataset.divPlaceholderContent);
+      delete (this.dataset.divPlaceholderContent);
 
-		}
+    }
 
-	});
+  });
 
 })(jQuery);

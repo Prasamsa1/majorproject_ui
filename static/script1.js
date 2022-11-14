@@ -5,11 +5,13 @@ let showSuggestions = false;
 let suggestedWord = "";
 let hasPredictContainer = false;
 
-document.addEventListener('keydown', (e) => {
-    if (e.code === "Space") {
-        console.log(textarea.value)
+document.addEventListener('keydown', (event) => {
+    
+    if (event.code === "Space") {
+        
+        console.log(textarea.textContent)
         let data = new FormData()
-        data.append("text_area", textarea.value)
+        data.append("text_area", textarea.textContent)
         fetch('/', {
             "method": "POST",
             "body": data,
@@ -17,25 +19,24 @@ document.addEventListener('keydown', (e) => {
             console.log(text)
         })
     }
-    textarea.focus();
-});
+}); 
 
-// function loadData(){
-//     fetch('/')
-//     .then(function(response){
-//         return response.text();
-//     })
-//     .then(function(data){
-//         console.log(data)
-//             div.innerHTML=data;
-// })
-// }
+function loadData(){
+    fetch('/')
+    .then(function(response){
+        return response.text();
+    })
+    .then(function(data){
+        console.log(data)
+        
+        
+    }) 
+}
+
 
 document.addEventListener("keydown", (event) => {
-    tabKeyPressed = event.key === "Tab";
+    tabKeyPressed = event.key === "Shift";  
     if (tabKeyPressed) {
-      textarea.focus();
-      event.preventDefault();
       loadData();
       return;
     }
