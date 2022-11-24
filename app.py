@@ -13,9 +13,6 @@ def home_page():
 def predict():
     if request.method == 'POST':
         text = request.form.getlist("text_area")
-        sentence = random.choice(data)
-        output=sentence
-        print(output)
-        # return str(sentence)
+        output = random.choice(data)
 
     return str(output)

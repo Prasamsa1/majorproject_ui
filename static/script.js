@@ -56,11 +56,12 @@ function predict(event) {
   const text = event.target.textContent
     ? event.target.childNodes[0].textContent
     : "";
+    console.log(text)
 
   let predictContainer = document.getElementById("predict");
   hasPredictContainer = Boolean(predictContainer);
 
-  if (event.code === "Space") {
+  // if (event.code === "Space" || event.code === "Tab") { 
     let data = new FormData()
     data.append("text_area", text)
     const word = fetch('/', {
@@ -72,7 +73,7 @@ function predict(event) {
     // if (showSuggestions && !hasPredictContainer) {
     //   //Implement ML model here
 
-    getSuggestedWord = () => {
+    const getSuggestedWord = () => {
       word.then((suggestedWord) => {
         showSuggestionWord(suggestedWord);
         showSuggestions = true
@@ -85,15 +86,14 @@ function predict(event) {
           resetSuggestions();
         }
       })
-        if (showSuggestions && hasPredictContainer) {
-          predictContainer.remove();
-          resetSuggestions();
-        }
-      
+      if (showSuggestions && hasPredictContainer) {
+        predictContainer.remove();
+        resetSuggestions();
+      }
+
     };
     getSuggestedWord()
 
-  }
   // }
 
   if (!showSuggestions && hasPredictContainer) {
@@ -101,12 +101,6 @@ function predict(event) {
     resetSuggestions();
   }
 
-  if (tabKeyPressed && hasPredictContainer) {
-    setCursor();
-    predictContainer.remove();
-    addSuggestions(event, suggestedWord);
-    resetSuggestions();
-  }
 }
 (function ($) {
 
