@@ -3,7 +3,7 @@ import random
 app = Flask(__name__)
 
 #load the model
-data = ["Prasamsa Paudel", "Gaming", "meet you", "one"]
+data = ["Prasamsa Paudel"]
 
 @app.route('/')
 def home_page():
@@ -19,3 +19,6 @@ def predict():
         # return str(sentence)
 
     return str(output)
+
+if __name__ == '__main__':
+    app.run(debug=True)
